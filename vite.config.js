@@ -1,20 +1,25 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
 // App-Name und Farben hier anpassen – sie landen im Web-App-Manifest.
-const APP_NAME = 'Neue App';
-const APP_SHORT_NAME = 'App';
-const THEME_COLOR = '#14532d';
-const BACKGROUND_COLOR = '#f7f5ef';
+const APP_NAME = 'Jessica Frieden – Portfolio';
+const APP_SHORT_NAME = 'J. Frieden';
+const THEME_COLOR = '#4f46e5';
+const BACKGROUND_COLOR = '#f8fafc';
 
 export default defineConfig({
   plugins: [
+    react(),
+    tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: APP_NAME,
         short_name: APP_SHORT_NAME,
+        description: 'Portfolio von Jessica Frieden – Digital Solutions & ICT Specialist',
         lang: 'de',
         start_url: '/',
         scope: '/',
@@ -29,7 +34,7 @@ export default defineConfig({
       },
       workbox: {
         navigateFallback: '/index.html',
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2}']
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2,pdf}']
       }
     })
   ]
