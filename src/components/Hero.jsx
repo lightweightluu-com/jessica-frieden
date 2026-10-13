@@ -64,7 +64,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Platzhalter für das Profilbild: einfach durch <img src="/profil.jpg"> ersetzen */}
+        {/* Profilbild (public/profil.jpg), kreisrund mit Farbverlauf-Rahmen */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -72,13 +72,13 @@ export default function Hero() {
           className="order-1 md:order-2"
         >
           <div className="rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 p-1.5 shadow-2xl shadow-indigo-500/25">
-            <div
-              role="img"
-              aria-label="Platzhalter für Profilbild von Jessica Frieden"
-              className="grid h-44 w-44 place-items-center rounded-full bg-surface text-5xl font-bold text-gradient sm:h-56 sm:w-56 md:h-72 md:w-72 md:text-7xl"
-            >
-              JF
-            </div>
+            <img
+              src="/profil.jpg"
+              alt="Porträt von Jessica Frieden"
+              width="640"
+              height="640"
+              className="h-44 w-44 rounded-full border-4 border-bg object-cover sm:h-56 sm:w-56 md:h-72 md:w-72"
+            />
           </div>
         </motion.div>
       </div>
