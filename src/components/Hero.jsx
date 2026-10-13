@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section id="start" className="relative flex min-h-[100svh] items-center overflow-hidden px-4 pt-24 pb-28 md:px-6">
       {/* Dekorative, weiche Farbflächen im Hintergrund */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
         <div className="absolute bottom-0 -left-24 h-96 w-96 rounded-full bg-cyan-500/15 blur-3xl" />
       </div>
