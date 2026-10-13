@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/* Dark Mode per Klasse (.dark auf <html>), gesteuert durch den Toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Design-Tokens – Light & Dark über CSS-Variablen, Tailwind-Utilities greifen darauf zu. */
+:root {
+  --c-bg: #f8fafc;
+  --c-surface: #ffffff;
+  --c-fg: #0f172a;
+  --c-muted: #475569;
+  --c-line: #e2e8f0;
+  --c-accent: #4338ca;
+  --c-accent-soft: #eef2ff;
+  --c-accent-2: #0e7490;
+  color-scheme: light;
+}
+.dark {
+  --c-bg: #0f172a;
+  --c-surface: #172036;
+  --c-fg: #f1f5f9;
+  --c-muted: #a3b1c6;
+  --c-line: #2a3652;
+  --c-accent: #a5b4fc;
+  --c-accent-soft: #1e2a52;
+  --c-accent-2: #67e8f9;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-fg: var(--c-fg);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-accent-2: var(--c-accent-2);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Weicher Farbverlauf-Text für Akzente */
+.text-gradient {
+  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
