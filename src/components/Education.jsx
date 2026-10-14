@@ -2,46 +2,52 @@ import Reveal from './Reveal.jsx';
 import SectionHeading from './SectionHeading.jsx';
 import { education, training, languages } from '../data/cv.js';
 
+// Zeilen-Liste im Mono/Serif-Stil: Zeitraum links, Titel + Detail rechts.
+function Row({ period, title, sub, text, delay = 0 }) {
+  return (
+    <Reveal delay={delay} className="grid gap-1 border-b border-line py-5 md:grid-cols-[11rem_1fr] md:gap-8">
+      <p className="label text-fg">{period}</p>
+      <div>
+        <h3 className="display text-xl font-semibold md:text-2xl">{title}</h3>
+        {sub && <p className="text-muted">{sub}</p>}
+        {text && <p className="mt-2 max-w-xl text-[15px] text-muted">{text}</p>}
+      </div>
+    </Reveal>
+  );
+}
+
 export default function Education() {
   return (
-    <section id="ausbildung" className="bg-surface/50 px-4 py-20 md:px-6 md:py-28">
+    <section id="ausbildung" className="px-4 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="Bildung" title="Ausbildung" />
+        <SectionHeading no="04" eyebrow="Bildung" title="Ausbildung" />
 
-        {education.map((e) => (
-          <Reveal key={e.school} className="rounded-2xl border border-line bg-surface p-5 md:p-6">
-            <p className="text-sm font-semibold text-accent">{e.period}</p>
-            <h3 className="mt-1 text-xl font-bold">{e.degree}</h3>
-            <p className="text-muted">{e.school}</p>
-            <p className="mt-3 text-[15px]">{e.text}</p>
-          </Reveal>
-        ))}
-
-        <div className="mt-10 grid gap-8 md:grid-cols-3">
-          <Reveal className="md:col-span-2">
-            <h3 className="mb-4 text-lg font-bold">Weiterbildungen</h3>
-            <ul className="space-y-3">
-              {training.map((t) => (
-                <li key={t.title} className="rounded-xl border border-line bg-surface p-4">
-                  <p className="text-xs font-semibold text-accent">{t.period}</p>
-                  <p className="font-semibold">{t.title}</p>
-                  <p className="text-sm text-muted">{t.detail}</p>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h3 className="mb-4 text-lg font-bold">Sprachen</h3>
-            <ul className="space-y-3">
-              {languages.map((l) => (
-                <li key={l.name} className="flex items-baseline justify-between rounded-xl border border-line bg-surface p-4">
-                  <span className="font-semibold">{l.name}</span>
-                  <span className="text-sm text-muted">{l.level}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
+        <div className="border-t border-line">
+          {education.map((e) => (
+            <Row key={e.school} period={e.period} title={e.degree} sub={e.school} text={e.text} />
+          ))}
         </div>
+
+        <Reveal className="mt-14">
+          <h3 className="label mb-1">Weiterbildungen</h3>
+        </Reveal>
+        <div className="border-t border-line">
+          {training.map((t, i) => (
+            <Row key={t.title} period={t.period} title={t.title} text={t.detail} delay={i * 0.05} />
+          ))}
+        </div>
+
+        <Reveal className="mt-14">
+          <h3 className="label mb-3">Sprachen</h3>
+          <ul className="flex flex-wrap gap-x-10 gap-y-2">
+            {languages.map((l) => (
+              <li key={l.name}>
+                <span className="display text-2xl font-semibold">{l.name}</span>{' '}
+                <span className="text-muted">{l.level}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   );

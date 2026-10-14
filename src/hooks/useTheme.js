@@ -8,7 +8,7 @@ export function useTheme() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', dark);
     const meta = document.querySelectorAll('meta[name="theme-color"]');
-    meta.forEach((m) => m.setAttribute('content', dark ? '#0f172a' : '#f8fafc'));
+    meta.forEach((m) => m.setAttribute('content', dark ? '#0d1424' : '#f5f2ea'));
   }, [dark]);
 
   const toggle = useCallback(() => {

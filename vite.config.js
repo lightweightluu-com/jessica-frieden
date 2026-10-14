@@ -6,8 +6,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 // App-Name und Farben hier anpassen – sie landen im Web-App-Manifest.
 const APP_NAME = 'Jessica Frieden – Portfolio';
 const APP_SHORT_NAME = 'J. Frieden';
-const THEME_COLOR = '#4f46e5';
-const BACKGROUND_COLOR = '#f8fafc';
+const THEME_COLOR = '#0d1424';
+const BACKGROUND_COLOR = '#f5f2ea';
 
 export default defineConfig({
   plugins: [
@@ -34,7 +34,9 @@ export default defineConfig({
       },
       workbox: {
         navigateFallback: '/index.html',
-        globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2,pdf}']
+        globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2,pdf,jpg}'],
+        // Nur lateinische Schriftschnitte vorab cachen (spart ~400 kB)
+        globIgnores: ['**/*-cyrillic*', '**/*-greek*', '**/*-vietnamese*']
       }
     })
   ]

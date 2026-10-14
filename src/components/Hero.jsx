@@ -1,97 +1,115 @@
 import { motion } from 'framer-motion';
-import { Download, Mail, MapPin, Phone, ChevronDown } from 'lucide-react';
+import { ArrowRight, Download, Mail, MapPin, Phone } from 'lucide-react';
 import { profile } from '../data/cv.js';
 
-const contacts = [
-  { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
-  { icon: Phone, label: profile.phone, href: `tel:${profile.phoneHref}` },
-  { icon: MapPin, label: profile.location },
+// Kerndaten als Mono-Liste – echte Fakten statt Deko.
+const facts = [
+  ['Rolle', 'ICT-Supporterin'],
+  ['Bei', 'Swissgrid AG, Aarau'],
+  ['Seit', '10.2024'],
+  ['Fokus', 'IAM · Cybersecurity · Endpoint'],
+  ['Sprachen', 'DE · EN'],
 ];
+
+const ease = [0.22, 1, 0.36, 1];
 
 export default function Hero() {
   return (
-    <section id="start" className="relative flex min-h-[100svh] items-center overflow-hidden px-4 pt-24 pb-28 md:px-6">
-      {/* Dekorative, weiche Farbflächen im Hintergrund */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
-        <div className="absolute bottom-0 -left-24 h-96 w-96 rounded-full bg-cyan-500/15 blur-3xl" />
-      </div>
+    <section id="start" className="px-4 pt-28 pb-16 md:px-6 md:pt-36 md:pb-24">
+      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
+        <div className="order-2 md:order-1">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="label"
+          >
+            {profile.title} <span aria-hidden="true">·</span> {profile.subtitle}
+          </motion.p>
 
-      <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 text-center md:flex-row md:justify-between md:text-left">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="order-2 max-w-xl md:order-1"
-        >
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent">Portfolio</p>
-          <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-            {profile.name.split(' ')[0]} <span className="text-gradient">{profile.name.split(' ')[1]}</span>
-          </h1>
-          <p className="mt-4 text-lg font-semibold md:text-xl">{profile.title}</p>
-          <p className="text-muted md:text-lg">{profile.subtitle}</p>
+          <motion.h1
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease, delay: 0.05 }}
+            className="display mt-4 text-[2.75rem] leading-[1.02] font-semibold sm:text-6xl md:text-7xl"
+          >
+            Jessica <br className="hidden sm:block" />
+            Frieden
+          </motion.h1>
 
-          <ul className="mt-6 flex flex-col items-center gap-2 text-sm md:items-start">
-            {contacts.map(({ icon: I, label, href }) => (
-              <li key={label}>
-                {href ? (
-                  <a href={href} className="inline-flex min-h-11 items-center gap-2 text-muted transition hover:text-accent">
-                    <I size={18} aria-hidden="true" /> {label}
-                  </a>
-                ) : (
-                  <span className="inline-flex min-h-11 items-center gap-2 text-muted">
-                    <I size={18} aria-hidden="true" /> {label}
-                  </span>
-                )}
-              </li>
-            ))}
-          </ul>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease, delay: 0.1 }}
+            className="mt-5 max-w-md text-lg leading-snug text-muted md:text-xl"
+          >
+            Ich betreue die Enterprise-IT bei Swissgrid und erkläre Technik so, dass Anwenderinnen und Anwender
+            damit arbeiten können.
+          </motion.p>
 
-          <div className="mt-6 flex flex-wrap justify-center gap-3 md:justify-start">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease, delay: 0.15 }}
+            className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3"
+          >
             <a
               href={profile.cvUrl}
               download
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-accent px-6 font-semibold text-bg shadow-lg shadow-indigo-500/20 transition hover:opacity-90 active:scale-95"
+              className="inline-flex h-12 items-center gap-2 rounded-md bg-accent px-6 font-semibold text-accent-ink transition-opacity duration-150 hover:opacity-90 active:scale-95"
             >
-              <Download size={18} aria-hidden="true" /> Lebenslauf (PDF)
+              <Download size={18} aria-hidden="true" /> Lebenslauf als PDF
             </a>
             <a
-              href={`mailto:${profile.email}`}
-              className="inline-flex h-12 items-center gap-2 rounded-full border border-line bg-surface px-6 font-semibold transition hover:border-accent hover:text-accent active:scale-95"
+              href="#kontakt"
+              className="group inline-flex min-h-11 items-center gap-1.5 font-semibold underline decoration-line-strong underline-offset-4 transition-colors duration-150 hover:decoration-accent"
             >
-              <Mail size={18} aria-hidden="true" /> Kontakt
+              Kontakt aufnehmen
+              <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-150 group-hover:translate-x-1" />
             </a>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Profilbild (public/profil.jpg), kreisrund mit Farbverlauf-Rahmen */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="order-1 md:order-2"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease }}
+          className="order-1 flex flex-col items-start gap-6 md:order-2"
         >
-          <div className="rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 p-1.5 shadow-2xl shadow-indigo-500/25">
+          {/* Profilbild: kreisrund, Haarlinien-Ring mit Abstand statt Verlauf */}
+          <div className="rounded-full border border-line-strong p-2">
             <img
               src="/profil.jpg"
               alt="Porträt von Jessica Frieden"
               width="640"
               height="640"
-              className="h-44 w-44 rounded-full border-4 border-bg object-cover sm:h-56 sm:w-56 md:h-72 md:w-72"
+              fetchpriority="high"
+              className="h-36 w-36 rounded-full object-cover sm:h-44 sm:w-44 md:h-56 md:w-56"
             />
           </div>
+
+          <dl className="hidden w-full max-w-xs font-mono md:block text-[13px] leading-6">
+            {facts.map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-4 border-b border-line py-1.5 first:border-t">
+                <dt className="text-muted">{k}</dt>
+                <dd className="text-right">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </motion.div>
       </div>
 
-      <a
-        href="#profil"
-        aria-label="Zum Profil scrollen"
-        className="absolute bottom-24 left-1/2 hidden -translate-x-1/2 text-muted md:block"
-      >
-        <motion.span animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.8 }} className="block">
-          <ChevronDown aria-hidden="true" />
-        </motion.span>
-      </a>
+      <div className="mx-auto mt-12 flex max-w-5xl flex-wrap gap-x-8 gap-y-1 text-sm text-muted">
+        <a href={`mailto:${profile.email}`} className="inline-flex min-h-11 items-center gap-2 hover:text-accent">
+          <Mail size={16} aria-hidden="true" /> {profile.email}
+        </a>
+        <a href={`tel:${profile.phoneHref}`} className="inline-flex min-h-11 items-center gap-2 hover:text-accent">
+          <Phone size={16} aria-hidden="true" /> {profile.phone}
+        </a>
+        <span className="inline-flex min-h-11 items-center gap-2">
+          <MapPin size={16} aria-hidden="true" /> {profile.location}
+        </span>
+      </div>
     </section>
   );
 }

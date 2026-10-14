@@ -1,43 +1,62 @@
 @import 'tailwindcss';
 @import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/jetbrains-mono';
 
 /* Dark Mode per Klasse (.dark auf <html>), gesteuert durch den Toggle. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Design-Tokens – Light & Dark über CSS-Variablen, Tailwind-Utilities greifen darauf zu. */
+/* ───────── Design-Tokens ─────────
+   Neutrale Basis + EIN Akzent (Signalorange, nimmt das Haar-Rot aus dem Foto auf).
+   Dark Mode: tiefes Blau statt Schwarz, Akzent aufgehellt. */
 :root {
-  --c-bg: #f8fafc;
-  --c-surface: #ffffff;
-  --c-fg: #0f172a;
-  --c-muted: #475569;
-  --c-line: #e2e8f0;
-  --c-accent: #4338ca;
-  --c-accent-soft: #eef2ff;
-  --c-accent-2: #0e7490;
+  --c-bg: #f5f2ea;
+  --c-raised: #fbf9f4;
+  --c-fg: #14182b;
+  --c-muted: #565b6e;
+  --c-line: rgba(20, 24, 43, 0.14);
+  --c-line-strong: rgba(20, 24, 43, 0.3);
+  --c-accent: #b93c0a;
+  --c-accent-ink: #ffffff;
+  --c-accent-soft: rgba(185, 60, 10, 0.09);
+  --shadow-card: 0 1px 2px rgba(20, 24, 43, 0.06), 0 6px 14px rgba(20, 24, 43, 0.06), 0 22px 40px rgba(20, 24, 43, 0.07);
   color-scheme: light;
 }
 .dark {
-  --c-bg: #0f172a;
-  --c-surface: #172036;
-  --c-fg: #f1f5f9;
-  --c-muted: #a3b1c6;
-  --c-line: #2a3652;
-  --c-accent: #a5b4fc;
-  --c-accent-soft: #1e2a52;
-  --c-accent-2: #67e8f9;
+  --c-bg: #0d1424;
+  --c-raised: #141c30;
+  --c-fg: #eceef5;
+  --c-muted: #a1a9bd;
+  --c-line: rgba(236, 238, 245, 0.12);
+  --c-line-strong: rgba(236, 238, 245, 0.28);
+  --c-accent: #ff8d5e;
+  --c-accent-ink: #1a0d06;
+  --c-accent-soft: rgba(255, 141, 94, 0.12);
+  --shadow-card: 0 0 0 1px rgba(236, 238, 245, 0.06);
   color-scheme: dark;
 }
 
 @theme inline {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --color-bg: var(--c-bg);
-  --color-surface: var(--c-surface);
+  --color-raised: var(--c-raised);
   --color-fg: var(--c-fg);
   --color-muted: var(--c-muted);
   --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
   --color-accent: var(--c-accent);
+  --color-accent-ink: var(--c-accent-ink);
   --color-accent-soft: var(--c-accent-soft);
-  --color-accent-2: var(--c-accent-2);
+  --shadow-card: var(--shadow-card);
+  /* Radius-Skala: 4 / 8 / 12 / 16 / 24 */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
@@ -54,21 +73,38 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+/* Dezentes Papier-Korn gegen die sterile Flächigkeit */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 :focus-visible {
   outline: 2px solid var(--c-accent);
-  outline-offset: 3px;
-  border-radius: 6px;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Weicher Farbverlauf-Text für Akzente */
-.text-gradient {
-  background: linear-gradient(90deg, var(--c-accent), var(--c-accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Mono-Label (Daten, Sektionsnummern) */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+.display {
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+  letter-spacing: -0.02em;
 }
 
 @media (prefers-reduced-motion: reduce) {

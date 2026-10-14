@@ -1,10 +1,14 @@
 import Reveal from './Reveal.jsx';
 
-export default function SectionHeading({ eyebrow, title }) {
+// Sektionskopf: Mono-Nummer + Serif-Titel, mit Haarlinie darüber (Editorial-Stil).
+export default function SectionHeading({ no, eyebrow, title }) {
   return (
-    <Reveal className="mb-10 md:mb-14">
-      <p className="text-sm font-semibold uppercase tracking-widest text-accent">{eyebrow}</p>
-      <h2 className="mt-2 text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+    <Reveal className="mb-10 border-t border-line-strong pt-4 md:mb-14">
+      <p className="label flex items-baseline gap-3">
+        <span className="text-accent">{no}</span>
+        <span>{eyebrow}</span>
+      </p>
+      <h2 className="display mt-3 text-4xl font-semibold md:text-5xl">{title}</h2>
     </Reveal>
   );
 }
