@@ -12,9 +12,9 @@ export const profile = {
   about:
     'Digital- und ICT-Spezialistin mit über sechs Jahren Erfahrung in Enterprise IT, Healthcare IT und der Betreuung digitaler Anwendungen. Berufliche Entwicklung vom kunden- und gesundheitsnahen Umfeld über branchenspezifische Softwarelösungen bis zur Betreuung einer komplexen Enterprise-IT-Landschaft bei Swissgrid. Breite Praxiserfahrung von Identity & Access Management über Cybersecurity bis hin zu QA-Testing. Ich verbinde technische Analyse mit verständlicher Kommunikation und ausgeprägter Nutzerorientierung.',
   facts: [
-    { value: '6+', label: 'Jahre Erfahrung' },
-    { value: '3', label: 'Branchen & Rollen' },
-    { value: '24/7', label: 'Notfalldienst' },
+    { to: 6, suffix: '+', label: 'Jahre Erfahrung' },
+    { to: 3, suffix: '', label: 'Branchen & Rollen' },
+    { to: 24, suffix: '/7', label: 'Notfalldienst' },
   ],
   competencies: [
     'Digital Solutions & Applications',

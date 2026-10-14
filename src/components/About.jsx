@@ -1,5 +1,7 @@
 import Reveal from './Reveal.jsx';
 import SectionHeading from './SectionHeading.jsx';
+import ScrollWords from './fx/ScrollWords.jsx';
+import CountUp from './fx/CountUp.jsx';
 import { profile } from '../data/cv.js';
 
 export default function About() {
@@ -8,9 +10,7 @@ export default function About() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading no="01" eyebrow="Über mich" title="Profil" />
         <div className="grid gap-12 md:grid-cols-[1.6fr_1fr] md:gap-16">
-          <Reveal>
-            <p className="display text-2xl leading-snug md:text-[1.75rem]">{profile.about}</p>
-          </Reveal>
+          <ScrollWords text={profile.about} className="display text-2xl leading-snug md:text-[1.75rem]" />
 
           <div>
             {/* Kennzahlen als typografische Liste statt Karten */}
@@ -18,7 +18,7 @@ export default function About() {
               {profile.facts.map((f) => (
                 <div key={f.label} className="flex items-baseline justify-between gap-4 border-b border-line py-4">
                   <dt className="label">{f.label}</dt>
-                  <dd className="display text-4xl font-semibold">{f.value}</dd>
+                  <dd className="display text-4xl font-semibold"><CountUp to={f.to} suffix={f.suffix} /></dd>
                 </div>
               ))}
             </Reveal>

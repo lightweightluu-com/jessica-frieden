@@ -5,7 +5,7 @@ import { education, training, languages } from '../data/cv.js';
 // Zeilen-Liste im Mono/Serif-Stil: Zeitraum links, Titel + Detail rechts.
 function Row({ period, title, sub, text, delay = 0 }) {
   return (
-    <Reveal delay={delay} className="grid gap-1 border-b border-line py-5 md:grid-cols-[11rem_1fr] md:gap-8">
+    <Reveal delay={delay} className="group relative grid gap-1 border-b border-line py-5 after:absolute after:bottom-[-1px] after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition-[scale] after:duration-300 hover:after:scale-x-100 md:grid-cols-[11rem_1fr] md:gap-8">
       <p className="label text-fg">{period}</p>
       <div>
         <h3 className="display text-xl font-semibold md:text-2xl">{title}</h3>

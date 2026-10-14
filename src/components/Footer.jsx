@@ -1,5 +1,7 @@
 import { ArrowUpRight, Download } from 'lucide-react';
 import Reveal from './Reveal.jsx';
+import SplitText from './fx/SplitText.jsx';
+import Magnetic from './fx/Magnetic.jsx';
 import { profile } from '../data/cv.js';
 
 // Schluss-CTA (identisch zum Hero: Lebenslauf + Kontakt), danach die Fusszeile.
@@ -9,14 +11,16 @@ export default function Footer() {
       <div className="mx-auto max-w-5xl">
         <Reveal className="border-t border-line-strong pt-6">
           <p className="label text-accent">Kontakt</p>
-          <h2 className="display mt-3 text-4xl font-semibold md:text-6xl">Lass uns sprechen.</h2>
+          <SplitText as="h2" text="Lass uns sprechen." inView className="display mt-3 text-5xl font-semibold md:text-8xl" />
+          <Magnetic className="mt-6">
           <a
             href={`mailto:${profile.email}`}
-            className="group mt-6 inline-flex min-h-11 items-center gap-2 text-xl font-semibold underline decoration-line-strong underline-offset-8 transition-colors duration-150 hover:decoration-accent md:text-3xl"
+            className="group inline-flex min-h-11 items-center gap-2 text-xl font-semibold underline decoration-line-strong underline-offset-8 transition-colors duration-150 hover:decoration-accent md:text-3xl"
           >
             {profile.email}
             <ArrowUpRight size={24} aria-hidden="true" className="transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </a>
+          </Magnetic>
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-muted">
             <a href={`tel:${profile.phoneHref}`} className="inline-flex min-h-11 items-center hover:text-accent">
               {profile.phone}
