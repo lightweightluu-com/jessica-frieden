@@ -9,7 +9,7 @@ const wrap = (min, max, v) => {
 };
 
 // Endloses Laufband. Scrollgeschwindigkeit beschleunigt es und kehrt die Richtung beim Hochscrollen um.
-export default function Marquee({ items, speed = 4, className = '' }) {
+export default function Marquee({ items, speed = 0.45, className = '' }) {
   const ref = useRef(null);
   const inView = useInView(ref);
   const reduced = useReducedMotion();
@@ -17,7 +17,7 @@ export default function Marquee({ items, speed = 4, className = '' }) {
   const dir = useRef(1);
   const { scrollY } = useScroll();
   const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const boost = useTransform(velocity, [-1500, 0, 1500], [-4, 0, 4], { clamp: false });
+  const boost = useTransform(velocity, [-1500, 0, 1500], [-1.5, 0, 1.5], { clamp: false });
   const x = useTransform(base, (v) => `${wrap(-50, 0, v)}%`);
 
   useAnimationFrame((_, delta) => {
