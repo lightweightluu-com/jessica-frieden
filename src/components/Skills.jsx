@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Reveal from './Reveal.jsx';
 import SectionHeading from './SectionHeading.jsx';
+import Tilt from './fx/Tilt.jsx';
 import { skillGroups } from '../data/cv.js';
 
 // Antippbare Skill-Pill: Auswahl füllt die Pill (Farbe + Haken-Punkt, nicht nur Farbe).
@@ -31,7 +32,7 @@ function SkillCard({ group, no, index }) {
 
   return (
     <Reveal delay={index * 0.05}>
-      <article className="h-full rounded-xl border border-line bg-raised p-5 transition-[transform,box-shadow] duration-200 ease-out hover:-translate-y-2 hover:shadow-card md:p-6 [@media(hover:none)]:hover:translate-y-0">
+      <Tilt className="h-full rounded-xl border border-line bg-raised p-5 transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-2 hover:shadow-card md:p-6 [@media(hover:none)]:hover:translate-y-0">
         <p className="label text-accent">{no}</p>
         <h3 className="display mt-1 text-2xl font-semibold">{group.title}</h3>
         <p className="mt-2 min-h-12 text-sm text-muted" aria-live="polite">
@@ -50,7 +51,7 @@ function SkillCard({ group, no, index }) {
             </li>
           ))}
         </ul>
-      </article>
+      </Tilt>
     </Reveal>
   );
 }

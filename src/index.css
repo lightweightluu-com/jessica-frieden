@@ -114,3 +114,15 @@ body::before {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Konturschrift für Riesenzahlen/-wörter im Hintergrund */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--c-line-strong);
+}
+
+/* Lenis (weiches Scrollen) */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+html.intro-lock { overflow: hidden; }

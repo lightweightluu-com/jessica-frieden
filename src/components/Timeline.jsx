@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import Reveal from './Reveal.jsx';
 import SectionHeading from './SectionHeading.jsx';
@@ -18,7 +18,9 @@ function TimelineItem({ item, index }) {
         className={`absolute top-1.5 left-0 h-3 w-3 rounded-full border-2 border-accent md:left-[11rem] md:ml-[-0.4rem] md:translate-x-[1rem] ${
           item.current ? 'bg-accent' : 'bg-bg'
         }`}
-      />
+      >
+        {item.current && <span className="absolute -inset-0.5 animate-ping rounded-full bg-accent/50 motion-reduce:hidden" />}
+      </span>
 
       <Reveal from="left" className="md:pt-0">
         <p className="label text-fg">{item.period}</p>
@@ -81,6 +83,7 @@ export default function Timeline() {
   // Fortschrittslinie wächst mit dem Scrollen durch die Timeline.
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 70%', 'end 70%'] });
   const scaleY = useSpring(scrollYProgress, { stiffness: 140, damping: 26 });
+  const headTop = useTransform(scaleY, (v) => `${Math.min(Math.max(v, 0), 1) * 100}%`);
 
   return (
     <section id="werdegang" className="px-4 py-16 md:px-6 md:py-24">
@@ -92,6 +95,12 @@ export default function Timeline() {
             aria-hidden="true"
             style={{ scaleY, transformOrigin: 'top' }}
             className="absolute top-2 bottom-2 left-[5px] w-px bg-accent md:left-[calc(11rem+1.1rem)]"
+          />
+          {/* Leuchtender Punkt wandert mit dem Scrollfortschritt entlang der Linie */}
+          <motion.span
+            aria-hidden="true"
+            style={{ top: headTop }}
+            className="absolute left-[-1px] z-10 h-[11px] w-[11px] -translate-y-1/2 rounded-full bg-accent shadow-[0_0_0_4px_var(--c-accent-soft),0_0_18px_var(--c-accent)] md:left-[calc(11rem+1.1rem-5px)]"
           />
           <ol>
             {experience.map((item, i) => (
