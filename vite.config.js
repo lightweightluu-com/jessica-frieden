@@ -34,6 +34,7 @@ export default defineConfig({
       },
       workbox: {
         navigateFallback: '/index.html',
+        navigateFallbackDenylist: [/^\/robots\.txt$/],
         globPatterns: ['**/*.{js,css,html,svg,png,ico,webp,woff2,pdf,jpg}'],
         // Nur lateinische Schriftschnitte vorab cachen (spart ~400 kB)
         globIgnores: ['**/*-cyrillic*', '**/*-greek*', '**/*-vietnamese*']
