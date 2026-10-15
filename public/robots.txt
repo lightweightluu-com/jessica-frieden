@@ -1,0 +1,21 @@
+# Persönliches Portfolio: nicht für Suchmaschinen oder KI-Training gedacht.
+# Suchmaschinen dürfen die Seite abrufen, damit sie das noindex-Signal (Meta-Tag und
+# X-Robots-Tag-Header) sehen und sie nicht aufnehmen. KI- und Daten-Crawler sind gesperrt.
+
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: *
+Allow: /
